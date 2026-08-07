@@ -1,0 +1,20 @@
+<div class="category-filter-bar">
+  <label for="category-select">Filter by Category:</label>
+
+  @if (productService.categoriesResource.isLoading()) {
+    <select id="category-select" disabled aria-label="Loading categories">
+      <option>Loading categories...</option>
+    </select>
+  } @else if (productService.categoriesResource.value(); as categories) {
+    <select
+      id="category-select"
+      [value]="productService.selectedCategory()"
+      (change)="onSelectChange($event)"
+    >
+      <option value="">All Categories</option>
+      @for (category of categories; track category.slug) {
+        <option [value]="category.slug">{{ category.name }}</option>
+      }
+    </select>
+  }
+</div>
