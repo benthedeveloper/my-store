@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  margin-top: 2.5rem;
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.pagination-info {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary, #5c6274);
+}
+
+.pagination-info strong {
+  color: var(--color-text-primary, #2b2d42);
+}

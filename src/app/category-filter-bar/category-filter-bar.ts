@@ -13,6 +13,6 @@ export class CategoryFilterBar {
 
   onSelectChange(event: Event) {
     const select = event.target as HTMLSelectElement;
-    this.productService.selectedCategory.set(select.value);
+    this.productService.setCategory(select.value);
   }
 }

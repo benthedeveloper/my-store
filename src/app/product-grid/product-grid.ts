@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { Product as ProductService } from '../services/product';
 import { ProductCard } from '../product-card/product-card';
 import { Product } from '../shared/models/product';
+import { ProductPagination } from '../product-pagination/product-pagination';
 
 @Component({
   selector: 'app-product-grid',
-  imports: [ProductCard],
+  imports: [ProductCard, ProductPagination],
   templateUrl: './product-grid.html',
   styleUrl: './product-grid.css',
 })

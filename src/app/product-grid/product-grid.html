@@ -27,5 +27,12 @@
         <app-product-card [product]="product" (addToCart)="handleAddToCart($event)" />
       }
     </div>
+    @if (productService.productsResource.value(); as res) {
+      <app-product-pagination
+        [total]="res.total"
+        [skip]="productService.currentSkip()"
+        (pageChange)="productService.currentSkip.set($event)"
+      />
+    }
   }
 }

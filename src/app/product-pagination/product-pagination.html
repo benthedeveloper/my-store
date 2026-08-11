@@ -1,0 +1,23 @@
+@if (totalPages() > 1) {
+  <div class="pagination-container">
+    <button
+      class="btn btn-outline"
+      [disabled]="currentPage() === 1"
+      (click)="onPageChange(skip() - limit())"
+    >
+      &larr; Previous
+    </button>
+
+    <span class="pagination-info">
+      Page <strong>{{ currentPage() }}</strong> of <strong>{{ totalPages() }}</strong>
+    </span>
+
+    <button
+      class="btn btn-outline"
+      [disabled]="currentPage() === totalPages()"
+      (click)="onPageChange(skip() + limit())"
+    >
+      Next &rarr;
+    </button>
+  </div>
+}
