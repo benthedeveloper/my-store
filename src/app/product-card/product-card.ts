@@ -12,6 +12,7 @@ import { Product } from '../shared/models/product';
 export class ProductCard {
   product = input.required<Product>();
   addToCart = output<Product>();
+  isPriority = input<boolean>(false);
 
   onAddToCart(event: Event): void {
     event.stopPropagation();

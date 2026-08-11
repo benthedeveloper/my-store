@@ -2,7 +2,7 @@
 
 <div class="product-card">
   <div class="product-image-wrapper">
-    <img [ngSrc]="p.thumbnail" [alt]="p.title" width="260" height="260" priority />
+    <img [ngSrc]="p.thumbnail" [alt]="p.title" [priority]="isPriority()" width="260" height="260" />
   </div>
 
   <div class="product-info">

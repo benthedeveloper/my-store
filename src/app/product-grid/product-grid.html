@@ -23,8 +23,12 @@
   } @else {
     <!-- Product Grid -->
     <div class="product-grid">
-      @for (product of res.products; track product.id) {
-        <app-product-card [product]="product" (addToCart)="handleAddToCart($event)" />
+      @for (product of res.products; track product.id; let i = $index) {
+        <app-product-card
+          [product]="product"
+          [isPriority]="i === 0"
+          (addToCart)="handleAddToCart($event)"
+        />
       }
     </div>
     @if (productService.productsResource.value(); as res) {

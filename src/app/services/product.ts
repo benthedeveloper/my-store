@@ -2,7 +2,7 @@ import { inject, Service, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Category } from '../shared/models/category';
-import { ProductResponse } from '../shared/models/product';
+import { Product as ProductModel, ProductResponse } from '../shared/models/product';
 
 const MAX_LIMIT = 30;
 
@@ -38,5 +38,9 @@ export class Product {
   setCategory(categorySlug: string): void {
     this.selectedCategory.set(categorySlug);
     this.currentSkip.set(0);
+  }
+
+  getProductById(id: number) {
+    return this.http.get<ProductModel>(`${this.baseUrl}/${id}`);
   }
 }

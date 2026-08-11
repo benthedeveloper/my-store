@@ -1,0 +1,65 @@
+<a routerLink="/products" class="back-link">&larr; Back to Products</a>
+
+@if (productResource.isLoading()) {
+  <div class="product-detail-skeleton">
+    <div class="skeleton-gallery"></div>
+    <div class="skeleton-info">
+      <div class="skeleton-line title"></div>
+      <div class="skeleton-line price"></div>
+      <div class="skeleton-line desc"></div>
+    </div>
+  </div>
+} @else if (productResource.error()) {
+  <div class="error-message">
+    <h2>Product Not Found</h2>
+    <p>Sorry, we couldn't find the product you were looking for.</p>
+    <a routerLink="/products" class="btn btn-primary">Return Home</a>
+  </div>
+} @else if (productResource.value(); as product) {
+  <div class="product-detail-container">
+    <!-- Image Gallery Section -->
+    <div class="gallery-section">
+      <div class="main-image">
+        <img
+          [ngSrc]="selectedImage() || product.thumbnail"
+          [alt]="product.title"
+          width="500"
+          height="500"
+          priority
+        />
+      </div>
+
+      @if (product.images.length > 1) {
+        <div class="thumbnail-list">
+          @for (img of product.images; track img) {
+            <button
+              class="thumb-btn"
+              [class.active]="(selectedImage() || product.thumbnail) === img"
+              (click)="selectedImage.set(img)"
+            >
+              <img [ngSrc]="img" [alt]="product.title" width="80" height="80" />
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Product Meta Section -->
+    <div class="info-section">
+      <span class="category-badge">{{ product.category }}</span>
+      <h1 class="product-title">{{ product.title }}</h1>
+
+      <div class="price-row">
+        <span class="price">${{ product.price.toFixed(2) }}</span>
+      </div>
+
+      <p class="description">{{ product.description }}</p>
+
+      <div class="meta-row">
+        <span><strong>SKU:</strong> {{ product.sku }}</span>
+      </div>
+
+      <button class="btn btn-primary btn-lg" (click)="addToCart(product)">🛒 Add to Cart</button>
+    </div>
+  </div>
+}
