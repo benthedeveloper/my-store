@@ -1,0 +1,31 @@
+@if (productService.productsResource.isLoading()) {
+  <!-- Skeleton Loading UI -->
+  <div class="product-grid">
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+      <div class="product-card-skeleton">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-text"></div>
+        <div class="skeleton-text short"></div>
+      </div>
+    }
+  </div>
+} @else if (productService.productsResource.error()) {
+  <!-- Error State -->
+  <div class="state-message error">
+    <p>Failed to load products. Please try again later.</p>
+  </div>
+} @else if (productService.productsResource.value(); as res) {
+  @if (res.products.length === 0) {
+    <!-- Empty State -->
+    <div class="state-message">
+      <p>No products found in this category.</p>
+    </div>
+  } @else {
+    <!-- Product Grid -->
+    <div class="product-grid">
+      @for (product of res.products; track product.id) {
+        <app-product-card [product]="product" (addToCart)="handleAddToCart($event)" />
+      }
+    </div>
+  }
+}
