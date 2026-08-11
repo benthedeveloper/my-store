@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Product as ProductService } from '../services/product';
-// TODO import CartService
+import { Cart as CartService } from '../services/cart';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,8 +12,8 @@ import { Product as ProductService } from '../services/product';
   styleUrl: './product-detail.css',
 })
 export class ProductDetail {
-  private productService = inject(ProductService);
-  // private cartService = inject(CartService);
+  productService = inject(ProductService);
+  cartService = inject(CartService);
 
   // Input bound automatically from route param `/products/:id`
   id = input.required<string>();
@@ -28,7 +28,6 @@ export class ProductDetail {
   });
 
   addToCart(product: any): void {
-    console.log('TODO implement addToCart for product detail');
-    // this.cartService.addToCart(product);
+    this.cartService.addToCart(product);
   }
 }

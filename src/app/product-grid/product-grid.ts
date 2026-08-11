@@ -3,6 +3,7 @@ import { Product as ProductService } from '../services/product';
 import { ProductCard } from '../product-card/product-card';
 import { Product } from '../shared/models/product';
 import { ProductPagination } from '../product-pagination/product-pagination';
+import { Cart as CartService } from '../services/cart';
 
 @Component({
   selector: 'app-product-grid',
@@ -12,10 +13,9 @@ import { ProductPagination } from '../product-pagination/product-pagination';
 })
 export class ProductGrid {
   productService = inject(ProductService);
-  // TODO inject CartService
+  cartService = inject(CartService);
 
   handleAddToCart(product: Product): void {
-    console.log('TODO implement handleAddToCart');
-    // this.cartService.addToCart(product);
+    this.cartService.addToCart(product);
   }
 }

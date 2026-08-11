@@ -1,14 +1,11 @@
 <header>
-  <div class="header-container">
+  <nav class="header-container">
     <a routerLink="/" class="store-title">My Store</a>
     <a routerLink="/cart" class="cart-link" aria-label="Shopping cart">
       🛒 Cart
-      <!-- TODO add cart service logic -->
-      <!-- @if (cartService.totalCount() > 0) {
-        <span class="cart-badge">{{ cartService.totalCount() }}</span>
-      } -->
-      <!-- For now adding placeholder badge -->
-      <span class="cart-badge">3</span>
+      @if (cartService.totalItems() > 0) {
+        <span class="cart-badge">{{ cartService.totalItems() }}</span>
+      }
     </a>
-  </div>
+  </nav>
 </header>
