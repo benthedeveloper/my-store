@@ -11,9 +11,14 @@
       [value]="productService.selectedCategory()"
       (change)="onSelectChange($event)"
     >
-      <option value="">All Categories</option>
+      <option value="" [selected]="productService.selectedCategory() === ''">All Categories</option>
       @for (category of categories; track category.slug) {
-        <option [value]="category.slug">{{ category.name }}</option>
+        <option
+          [value]="category.slug"
+          [selected]="productService.selectedCategory() === category.slug"
+        >
+          {{ category.name }}
+        </option>
       }
     </select>
   }

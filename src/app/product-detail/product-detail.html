@@ -1,4 +1,4 @@
-<a routerLink="/products" class="back-link">&larr; Back to Products</a>
+<a routerLink="/" class="back-link">&larr; Back to Products</a>
 
 @if (productResource.isLoading()) {
   <div class="product-detail-skeleton">
@@ -13,7 +13,7 @@
   <div class="error-message">
     <h2>Product Not Found</h2>
     <p>Sorry, we couldn't find the product you were looking for.</p>
-    <a routerLink="/products" class="btn btn-primary">Return Home</a>
+    <a routerLink="/" class="btn btn-primary">Return Home</a>
   </div>
 } @else if (productResource.value(); as product) {
   <div class="product-detail-container">
