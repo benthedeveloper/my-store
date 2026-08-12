@@ -112,25 +112,35 @@
       <strong>Total Amount:</strong> {{ cartService.totalPrice() | currency }}
     </div>
 
-    <form (ngSubmit)="submitOrder($event)">
+    <form (submit)="onSubmitOrder($event)">
       <div class="form-group">
         <label for="name">Full Name</label>
-        <input type="text" id="name" required placeholder="Jane Doe" class="form-control" />
+        <input
+          type="text"
+          [formField]="checkoutForm.name"
+          id="name"
+          placeholder="Jane Doe"
+          class="form-control"
+          autoComplete="name"
+        />
       </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email"
+          [formField]="checkoutForm.email"
           id="email"
-          required
           placeholder="jane@example.com"
           class="form-control"
+          autoComplete="email"
         />
       </div>
 
       <div class="modal-actions">
         <button type="button" class="btn btn-outline" (click)="closeCheckout()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Place Order</button>
+        <button type="submit" class="btn btn-primary" [disabled]="checkoutForm().invalid()">
+          Place Order
+        </button>
       </div>
     </form>
   </dialog>
