@@ -1,0 +1,224 @@
+.cart-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Use CSS Grid for each cart row so child blocks wrap predictably */
+.cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 1rem;
+  align-items: center;
+  padding-block: 1rem;
+  padding-inline-end: 48px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Image */
+.item-image {
+  object-fit: contain;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  width: 72px;
+  height: 72px;
+}
+
+/* Main block (image + details) */
+.item-main {
+  display: flex;
+  flex: 1 1 300px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item-details {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.item-details h4 {
+  margin: 0 0 0.25rem 0;
+}
+
+.item-price {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Actions (quantity + total) */
+.item-actions {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: end;
+}
+
+.quantity-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.25rem;
+}
+
+.btn-qty {
+  background: none;
+  border: none;
+  width: 28px;
+  height: 28px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-qty:hover {
+  background-color: #f1f5f9;
+}
+
+.qty-count {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.item-total {
+  font-weight: bold;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Remove button placed in the last grid column */
+.btn-remove {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+  position: absolute;
+  inset-inline-end: 0;
+}
+
+.btn-remove:hover {
+  color: #ef4444;
+}
+
+/* Summary Card */
+.order-summary {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.total-row {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.75rem;
+}
+
+/* Modal dialog */
+.checkout-dialog {
+  border-color: transparent;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.2),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+/* Native backdrop styling */
+.checkout-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal-summary {
+  background-color: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  border: 1px solid #e2e8f0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.btn-text-danger {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-text-danger:hover {
+  text-decoration: underline;
+}
