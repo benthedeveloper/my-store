@@ -203,6 +203,14 @@
   box-sizing: border-box;
 }
 
+.error-list {
+  margin: 0.25rem 0 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-accent, #d90429);
+  font-size: 0.875rem;
+}
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;

@@ -123,6 +123,13 @@
           class="form-control"
           autoComplete="name"
         />
+        @if (checkoutForm.name().touched() && checkoutForm.name().invalid()) {
+          <ul class="error-list">
+            @for (error of checkoutForm.name().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -134,6 +141,13 @@
           class="form-control"
           autoComplete="email"
         />
+        @if (checkoutForm.email().touched() && checkoutForm.email().invalid()) {
+          <ul class="error-list">
+            @for (error of checkoutForm.email().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
       </div>
 
       <div class="modal-actions">
