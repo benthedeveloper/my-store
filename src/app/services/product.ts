@@ -1,6 +1,5 @@
 import { inject, Service, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { Category } from '../shared/models/category';
 import { Product as ProductModel, ProductResponse } from '../shared/models/product';
 
@@ -14,24 +13,18 @@ export class Product {
   selectedCategory = signal<string>('');
   currentSkip = signal<number>(0);
 
-  // Resource for loading categories list
-  categoriesResource = rxResource({
-    stream: () => this.http.get<Category[]>(`${this.baseUrl}/categories`),
-  });
+  // Resource for categories list
+  categoriesResource = httpResource<Category[]>(() => `${this.baseUrl}/categories`);
 
-  // Resource for products
-  productsResource = rxResource({
-    params: () => ({
-      category: this.selectedCategory(),
-      skip: this.currentSkip(),
-    }),
-    stream: ({ params }) => {
-      const url = params.category
-        ? `${this.baseUrl}/category/${params.category}?limit=${MAX_LIMIT}&skip=${params.skip}`
-        : `${this.baseUrl}?limit=${MAX_LIMIT}&skip=${params.skip}`;
+  productsResource = httpResource<ProductResponse>(() => {
+    const category = this.selectedCategory();
+    const skip = this.currentSkip();
 
-      return this.http.get<ProductResponse>(url);
-    },
+    const url = category
+      ? `${this.baseUrl}/category/${category}?limit=${MAX_LIMIT}&skip=${skip}`
+      : `${this.baseUrl}?limit=${MAX_LIMIT}&skip=${skip}`;
+
+    return { url };
   });
 
   // Helper to change category and reset pagination back to page 1
