@@ -13,6 +13,9 @@ describe('ProductPagination', () => {
 
     fixture = TestBed.createComponent(ProductPagination);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('total', 100);
+    fixture.componentRef.setInput('skip', 0);
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 

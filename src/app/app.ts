@@ -9,6 +9,4 @@ import { Footer } from './core/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('my-store');
-}
+export class App {}

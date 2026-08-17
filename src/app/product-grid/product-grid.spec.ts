@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductGrid } from './product-grid';
 
@@ -9,6 +10,7 @@ describe('ProductGrid', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProductGrid],
+      providers: [{ provide: ActivatedRoute, useValue: {} }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductGrid);
