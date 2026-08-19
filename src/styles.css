@@ -60,10 +60,6 @@ body {
   color: var(--color-text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-
-  /* Sticky footer layout using Flexbox */
-  display: flex;
-  flex-direction: column;
 }
 
 /* ==========================================================================
@@ -72,7 +68,6 @@ body {
 
 /* Main Content Wrapper */
 main {
-  flex: 1;
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;

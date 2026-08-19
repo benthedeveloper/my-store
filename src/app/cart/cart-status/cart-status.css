@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 1.5rem;
+  z-index: 110;
+  pointer-events: none;
+}
+
+.cart-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(calc(100% + 1.5rem));
+  max-height: 0;
+  pointer-events: auto;
+  transition:
+    max-height var(--transition-normal),
+    padding var(--transition-normal),
+    opacity var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.cart-status.is-visible {
+  max-height: 4rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  :host {
+    bottom: 1rem;
+  }
+
+  .cart-status {
+    margin: 0 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.status-icon {
+  display: inline-grid;
+  flex: 0 0 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.is-added .status-icon {
+  background-color: #2f855a;
+}
+
+.is-removed .status-icon {
+  background-color: var(--color-accent);
+}
+
+.status-message {
+  flex: 1;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.status-close {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.status-close:hover {
+  color: var(--color-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-status {
+    transition: none;
+  }
+}

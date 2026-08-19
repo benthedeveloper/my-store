@@ -5,6 +5,8 @@ import { CartItem } from '../shared/models/cart';
 
 @Service()
 export class Cart {
+  type = signal<'added' | 'removed' | 'cleared'>('added');
+
   // Storage key for localStorage
   private readonly STORAGE_KEY = 'my_store_cart';
 
@@ -19,6 +21,8 @@ export class Cart {
   totalPrice = computed(() =>
     this.cartItemsSignal().reduce((sum, item) => sum + item.product.price * item.quantity, 0),
   );
+
+  statusMessage = signal('');
 
   // Actions
   addToCart(product: Product, quantity: number = 1): void {
@@ -37,6 +41,8 @@ export class Cart {
     }
 
     this.updateCart(items);
+    this.type.set('added');
+    this.statusMessage.set(`${product.title} added to cart`);
   }
 
   updateQuantity(productId: number, quantity: number): void {
@@ -53,12 +59,26 @@ export class Cart {
   }
 
   removeFromCart(productId: number): void {
+    const item = this.cartItemsSignal().find((item) => item.product.id === productId);
     const items = this.cartItemsSignal().filter((item) => item.product.id !== productId);
+
     this.updateCart(items);
+
+    if (item) {
+      this.type.set('removed');
+      this.statusMessage.set(`${item.product.title} removed from cart`);
+    }
   }
 
-  clearCart(): void {
+  clearCart(showStatus = true): void {
     this.updateCart([]);
+
+    if (showStatus) {
+      this.type.set('cleared');
+      this.statusMessage.set('Cart cleared');
+    } else {
+      this.statusMessage.set('');
+    }
   }
 
   // Persistence helpers

@@ -1,0 +1,16 @@
+<div
+  class="cart-status"
+  [class.is-visible]="cartService.statusMessage()"
+  [class.is-added]="cartService.type() === 'added'"
+  [class.is-removed]="cartService.type() !== 'added'"
+  role="status"
+  aria-atomic="true"
+>
+  <span class="status-icon" aria-hidden="true">
+    {{ cartService.type() === 'added' ? '✓' : '×' }}
+  </span>
+  <span class="status-message">{{ cartService.statusMessage() }}</span>
+  <button type="button" class="status-close" aria-label="Dismiss notification" (click)="dismiss()">
+    ×
+  </button>
+</div>

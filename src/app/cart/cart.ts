@@ -91,7 +91,7 @@ export class Cart {
     }
 
     this.isOrderPlaced.set(true);
-    this.cartService.clearCart();
+    this.cartService.clearCart(false);
     this.closeCheckout();
   }
 }
