@@ -112,22 +112,22 @@
       <strong>Total Amount:</strong> {{ cartService.totalPrice() | currency }}
     </div>
 
-    <form (submit)="onSubmitOrder($event)">
+    <form (submit)="onSubmitOrder($event)" novalidate>
       <div class="form-group">
         <label for="name">Full Name</label>
         <input
           type="text"
-          [formField]="checkoutForm.name"
+          [(ngModel)]="checkoutModel.name"
+          (ngModelChange)="validateName()"
+          name="name"
           id="name"
           placeholder="Jane Doe"
           class="form-control"
           autoComplete="name"
         />
-        @if (checkoutForm.name().touched() && checkoutForm.name().invalid()) {
+        @if (nameError()) {
           <ul class="error-list">
-            @for (error of checkoutForm.name().errors(); track error) {
-              <li>{{ error.message }}</li>
-            }
+            <li>{{ nameError() }}</li>
           </ul>
         }
       </div>
@@ -135,24 +135,24 @@
         <label for="email">Email</label>
         <input
           type="email"
-          [formField]="checkoutForm.email"
+          [(ngModel)]="checkoutModel.email"
+          (ngModelChange)="validateEmail()"
+          name="email"
           id="email"
           placeholder="jane@example.com"
           class="form-control"
           autoComplete="email"
         />
-        @if (checkoutForm.email().touched() && checkoutForm.email().invalid()) {
+        @if (emailError()) {
           <ul class="error-list">
-            @for (error of checkoutForm.email().errors(); track error) {
-              <li>{{ error.message }}</li>
-            }
+            <li>{{ emailError() }}</li>
           </ul>
         }
       </div>
 
       <div class="modal-actions">
         <button type="button" class="btn btn-outline" (click)="closeCheckout()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="checkoutForm().invalid()">
+        <button type="submit" class="btn btn-primary" [disabled]="!!nameError() || !!emailError()">
           Place Order
         </button>
       </div>

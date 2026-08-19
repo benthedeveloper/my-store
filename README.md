@@ -6,8 +6,11 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Prerequisites
 
-- Install NodeJS with NPM if you have not yet done so (this app was tested with Node v24.18.0).
-- Run `npm install` to install dependencies.
+1. Install NodeJS with NPM. This Angular app was tested on the latest LTS version of Node (currently 24.19.0).
+    - I recommend using the NVM to install the latest LTS version of NodeJS:
+        - [unix, macOS, and Windows WSL](https://github.com/nvm-sh/nvm)
+        - [Windows](https://github.com/coreybutler/nvm-windows)
+2. Run `npm install` to install dependencies.
 
 ## Key Features
 

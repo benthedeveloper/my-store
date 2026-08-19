@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { form, FormField, minLength, required, email } from '@angular/forms/signals';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
@@ -13,7 +13,7 @@ interface CheckoutData {
 
 @Component({
   selector: 'app-cart',
-  imports: [FormField, RouterLink, CurrencyPipe, NgOptimizedImage],
+  imports: [FormsModule, RouterLink, CurrencyPipe, NgOptimizedImage],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -51,20 +51,45 @@ export class Cart {
     this.checkoutModal()?.nativeElement.close();
   }
 
-  checkoutModel = signal<CheckoutData>({
+  checkoutModel: CheckoutData = {
     name: '',
     email: '',
-  });
+  };
 
-  checkoutForm = form(this.checkoutModel, (schemaPath) => {
-    required(schemaPath.name, { message: 'Name is required' });
-    minLength(schemaPath.name, 2, { message: 'Name must be at least 2 characters' });
-    required(schemaPath.email, { message: 'Email is required' });
-    email(schemaPath.email, { message: 'Email must be valid' });
-  });
+  nameError = signal('');
+  emailError = signal('');
+
+  validateName(): void {
+    const name = this.checkoutModel.name.trim();
+    this.nameError.set(
+      name.length === 0
+        ? 'Name is required'
+        : name.length < 2
+          ? 'Name must be at least 2 characters'
+          : '',
+    );
+  }
+
+  validateEmail(): void {
+    const email = this.checkoutModel.email.trim();
+    this.emailError.set(
+      email.length === 0
+        ? 'Email is required'
+        : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+          ? ''
+          : 'Email must be valid',
+    );
+  }
 
   onSubmitOrder(event: Event): void {
     event.preventDefault();
+    this.validateName();
+    this.validateEmail();
+
+    if (this.nameError() || this.emailError()) {
+      return;
+    }
+
     this.isOrderPlaced.set(true);
     this.cartService.clearCart();
     this.closeCheckout();
